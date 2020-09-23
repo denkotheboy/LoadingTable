@@ -19,7 +19,7 @@ export default class App extends Component {
 
   updateTheData = () => {
     if (!this.state.isLoaded) {
-      fetch("https://run.mocky.io/v3/29736be2-ed9e-4cd7-bd53-3c25ef84d920")
+      fetch("http://10.171.0.113:8090/pyextradition/api/v1/data?warehouse=Lada")
         .then((res) => res.json())
         .then(
           (result) => {

@@ -67,7 +67,7 @@ export default class LoadingQueueTable extends Component {
       <>
         <table className="table table-bordered m-0">
           <thead className="header">
-            <tr className="header">
+            <tr className="header" id="field-height-loading-queue">
               <th className="text-center header" scope="col">
                 Маршрутный лист
               </th>
@@ -85,7 +85,7 @@ export default class LoadingQueueTable extends Component {
           <tbody>
             {Object.keys(this.props.data).map((line, id) =>
               id < this.state.to && id >= this.state.from ? (
-                <tr key={id} id="field-height-loading-queue">
+                <tr key={id}>
                   <td className="text-center">
                     {Object.values(this.props.data[line].document)}
                   </td>
