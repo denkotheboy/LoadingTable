@@ -30,6 +30,7 @@ export default class App extends Component {
               scroll_frequency: result.scroll_frequency,
               update_frequency: result.update_frequency
             });
+            //console.log("Update");
           },
           (error) => {
             this.setState({
@@ -45,6 +46,7 @@ export default class App extends Component {
   componentDidMount() {
     this.updateTheData();
     this.timer = setInterval(() => {
+      this.setState({isLoaded: false});
       this.updateTheData();
     }, this.state.update_frequency * 1000);
   }
