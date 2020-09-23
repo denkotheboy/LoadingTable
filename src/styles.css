@@ -1,0 +1,19 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.full-page-height {
+  height: 100vh;
+  overflow: auto;
+}
+
+.header {
+  position: sticky;
+  top: 0; /* Don't forget this, required for the stickiness */
+  background: #fac905;
+}
+
+* {
+  /* cursor: none; */
+}
