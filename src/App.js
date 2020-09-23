@@ -13,7 +13,7 @@ export default class App extends Component {
       data: null,
       free_gate: null,
       scroll_frequency: 5,
-      update_frequency: 5
+      update_frequency: 10
     };
   }
 
