@@ -60,13 +60,13 @@ export default class App extends Component {
       return (
         <div className="container-fluid full-page-height" id="container">
           <div className="row justify-content-between">
-            <div className="col-10 overflow-auto">
+            <div className="col-10 p-0 pr-2">
               <LoadingQueueTable
                 data={this.state.data}
                 scroll={this.state.scroll_frequency}
               />
             </div>
-            <div className="col-2 overflow-auto">
+            <div className="col-2 p-0">
               <FreeGateTable
                 data={this.state.free_gate}
                 scroll={this.state.scroll_frequency}

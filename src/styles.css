@@ -5,16 +5,21 @@
 
 .full-page-height {
   height: 100vh;
-  overflow: auto;
   min-width: 540px;
 }
 
 .header {
   position: sticky;
-  top: 0; /* Don't forget this, required for the stickiness */
+  top: 0;
   background: #fac905;
 }
 
 * {
-  /* cursor: none; */
+  cursor: none;
+}
+
+td.text-center, th.text-center {
+  /* font-size: 2.8vh; */
+  /* font-size: 2vmin; */
+  font-size: 1.6vw;
 }
