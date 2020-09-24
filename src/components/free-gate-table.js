@@ -6,6 +6,7 @@ export default class FreeGateTable extends Component {
     this.heightPage = null;
     this.heightLine = null;
     this.perPage = null;
+    this.heightHeaderLine = null;
 
     this.state = {
       to: 1,
@@ -47,10 +48,13 @@ export default class FreeGateTable extends Component {
 
   componentDidMount() {
     this.heightPage = document.getElementById("container").clientHeight;
-    this.heightLine = document.getElementById(
-      "field-height-free-gate"
-    ).clientHeight;
+    this.heightLine = document.getElementById("field-height-free-gate").clientHeight;
+    this.heightHeaderLine = document.getElementById("header-field-height-free-gate").clientHeight;
+    console.log(this.heightLine);
     this.perPage = Math.floor(this.heightPage / this.heightLine) - 1;
+    if (this.heightHeaderLine + (this.heightLine)*this.perPage > this.heightPage){
+      this.perPage--;
+    }
     this.expectNewToAndFrom();
     this.timer = setInterval(
       () => this.getTheNumberOfPages(),
@@ -67,7 +71,7 @@ export default class FreeGateTable extends Component {
       <>
         <table className="table table-bordered m-0">
           <thead className="header">
-            <tr className="header">
+            <tr className="header" id="header-field-height-free-gate">
               <th className="text-center header" scope="col">
                 Свободные ворота
               </th>

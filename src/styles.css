@@ -6,6 +6,7 @@
 .full-page-height {
   height: 100vh;
   overflow: auto;
+  min-width: 540px;
 }
 
 .header {
