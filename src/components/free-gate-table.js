@@ -80,9 +80,9 @@ export default class FreeGateTable extends Component {
             {Object.values(this.props.data).map((value, index) =>
               index < this.state.to && index >= this.state.from ? (
                 <tr key={index} id="field-height-free-gate">
-                  <th className="text-center" key={index}>
+                  <td className="text-center" key={index}>
                     {value}
-                  </th>
+                  </td>
                 </tr>
               ) : null
             )}
