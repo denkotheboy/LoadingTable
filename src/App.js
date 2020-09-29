@@ -19,7 +19,7 @@ export default class App extends Component {
 
   updateTheData = () => {
     if (!this.state.isLoaded) {
-      fetch("./pyextradition/api/v1/data?warehouse=Lada")
+      fetch("./data?warehouse=Lada")
         .then((res) => res.json())
         .then(
           (result) => {
