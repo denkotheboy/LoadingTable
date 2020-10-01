@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import "./styles.css";
-import LoadingQueueTable from "./components/loading-queue-table";
-import FreeGateTable from "./components/free-gate-table";
+import LadaLoadingQueueTable from "./components/loading-queue-table";
+import LadaFreeGateTable from "./components/free-gate-table";
+import NineOrFractionsTable from "./components/nine-or-fractions-table";
+import Remove from "./components/remove";
 
 export default class App extends Component {
   constructor(props) {
@@ -17,20 +19,29 @@ export default class App extends Component {
     };
   }
 
+  getURLVar = (key) => {
+    var vars = window.location.search.substr(1).split('&').reduce(function(res, a) {
+      var t = a.split('=');
+      res[decodeURIComponent(t[0])] = t.length === 1 ? null : decodeURIComponent(t[1]);
+      return res;
+    }, {});
+    return vars[key] ? vars[key] : ''; 
+  }
+
   updateTheData = () => {
     if (!this.state.isLoaded) {
-      fetch("./data?warehouse=Lada")
+      //fetch("./data?warehouse=Lada")
+      fetch("http://10.171.0.113:8090/pyextradition/api/v1/data?warehouse="+this.getURLVar("warehouse"))
         .then((res) => res.json())
         .then(
           (result) => {
             this.setState({
               isLoaded: true,
-              data: result.data,
+              data: this.getURLVar("warehouse") === "remove" ? result : result.data,
               free_gate: result.free_gate,
-              scroll_frequency: result.scroll_frequency,
-              update_frequency: result.update_frequency
+              scroll_frequency: result.scroll_frequency !== undefined ? result.scroll_frequency : 5,
+              update_frequency: result.update_frequency !== undefined ? result.update_frequency : 15,
             });
-            //console.log("Update");
           },
           (error) => {
             this.setState({
@@ -58,21 +69,41 @@ export default class App extends Component {
   render() {
     if (this.state.data !== null && this.state.free_gate !== null) {
       return (
-        <div className="container-fluid full-page-height" id="container">
-          <div className="row justify-content-between">
-            <div className="col-10 p-0 pr-2">
-              <LoadingQueueTable
+        <div className="container-fluid full-page-height m-0" id="container">
+          {this.getURLVar("warehouse") === "lada" ?
+            <div className="row justify-content-between">
+              <div className="col-10 p-0 pr-2">
+                <LadaLoadingQueueTable
+                  data={this.state.data}
+                  scroll={this.state.scroll_frequency}
+                />
+              </div>
+              <div className="col-2 p-0">
+                <LadaFreeGateTable
+                  data={this.state.free_gate}
+                  scroll={this.state.scroll_frequency}
+                />
+              </div>
+            </div>
+          : this.getURLVar("warehouse") === "nine" || this.getURLVar("warehouse") === "fractions" ? 
+          <div className="row p-0">
+            <div className="col-12 pt-2 pr-2 pl-2">
+              <NineOrFractionsTable 
                 data={this.state.data}
-                scroll={this.state.scroll_frequency}
+                scroll={this.state.scroll_frequency} 
               />
             </div>
-            <div className="col-2 p-0">
-              <FreeGateTable
-                data={this.state.free_gate}
-                scroll={this.state.scroll_frequency}
+          </div>:
+           this.getURLVar("warehouse") === "remove" ? 
+           <div className="row">
+            <div className="col-12 p-2">
+              <Remove 
+                data={this.state.data}
+                scroll={this.state.scroll_frequency} 
               />
             </div>
           </div>
+           : null}
         </div>
       );
     } else {

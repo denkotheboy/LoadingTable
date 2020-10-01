@@ -35,7 +35,7 @@ export default class LoadingQueueTable extends Component {
         page: 1
       });
     }
-    //console.log("Page queue: " + this.state.page);
+    console.log("Page queue: " + this.state.page);
     this.expectNewToAndFrom();
   };
 

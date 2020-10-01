@@ -1,5 +1,10 @@
+* {
+  /* cursor: none; */
+  font-style: normal; 
+  font-weight: normal; 
+}
 .App {
-  font-family: sans-serif;
+  /* font-family: sans-serif; */
   text-align: center;
 }
 
@@ -12,9 +17,6 @@
   background: #fac905;
 }
 
-* {
-  cursor: none;
-}
 
 td.text-center, th.text-center {
   /* font-size: 2.8vh; */
@@ -22,7 +24,15 @@ td.text-center, th.text-center {
   font-size: 1.6vw;
 }
 
-table.table-bordered{
+.text-size-vw {
+  font-size: 4vw;
+}
+
+.remove-text-size-vw {
+  font-size: 2.6vw;
+}
+
+table.table-bordered {
   border:1px solid #000;
 }
 table.table-bordered > thead > tr > th{
@@ -30,4 +40,23 @@ table.table-bordered > thead > tr > th{
 }
 table.table-bordered > tbody > tr > td{
   border:1px solid #000;
+}
+
+/* Nine or Fraction style*/
+.bg-blue {
+  background-color: #ade8f1;
+}
+.bg-blue-2 {
+  background-color: #98dbe3;
+}
+
+.bg-grey {
+  background-color: #A5c1c5;
+}
+
+.bg-green {
+  background-color: #00FA9A;
+}
+.bg-green-2 {
+  background-color: #4fffbb;
 }

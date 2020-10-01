@@ -25,20 +25,6 @@ export default class FreeGateTable extends Component {
     this.nextPage();
   };
 
-  nextPage = () => {
-    if (this.state.page < this.state.numberOfPages) {
-      this.setState({
-        page: this.state.page + 1
-      });
-    } else if (this.state.page === this.state.numberOfPages) {
-      this.setState({
-        page: 1
-      });
-    }
-    //console.log("Page gate: " + this.state.page);
-    this.expectNewToAndFrom();
-  };
-
   expectNewToAndFrom = () => {
     this.setState({
       to: this.state.page * this.perPage,
