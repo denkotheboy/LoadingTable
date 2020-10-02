@@ -37,7 +37,7 @@ export default class App extends Component {
           (result) => {
             this.setState({
               isLoaded: true,
-              data: this.getURLVar("warehouse") === "remove" ? result : result.data,
+              data: result.data,
               free_gate: result.free_gate,
               scroll_frequency: result.scroll_frequency !== undefined ? result.scroll_frequency : 5,
               update_frequency: result.update_frequency !== undefined ? result.update_frequency : 15,
