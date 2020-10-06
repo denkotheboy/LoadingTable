@@ -109,7 +109,6 @@ export default class App extends Component {
             <div className="col-12 pl-1 pr-1 pt-1 pb-0">
               <Sixteen 
                 data={this.state.data}
-                scroll={this.state.scroll_frequency} 
               />
             </div>
           </div>
