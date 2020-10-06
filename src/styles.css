@@ -17,7 +17,6 @@
   background: #fac905;
 }
 
-
 td.text-center, th.text-center {
   /* font-size: 2.8vh; */
   /* font-size: 2vmin; */
@@ -40,6 +39,46 @@ table.table-bordered > thead > tr > th{
 }
 table.table-bordered > tbody > tr > td{
   border:1px solid #000;
+}
+
+.flex-item {
+  border:1px solid #000;
+  font-size: 1.8vw;
+}
+.flex-item-empty {
+  border:1px solid #fff;
+}
+
+
+.border-white-left {
+  border-left: 1px solid #fff;
+}
+.border-white-top {
+  border-top: 1px solid #fff;
+}
+.border-white-right {
+  border-right: 1px solid #fff;
+}
+.border-white-bottom {
+  border-bottom: 1px solid #fff;;
+}
+
+
+.border-green-left {
+  border-left: 1px solid #00FA9A;
+}
+.border-green-top {
+  border-top: 1px solid #00FA9A;
+}
+.border-green-right {
+  border-right: 1px solid #00FA9A;
+}
+.border-green-bottom {
+  border-bottom: 1px solid #00FA9A;;
+}
+
+.row-height {
+  height: 6.6% !important;
 }
 
 /* Nine or Fraction style*/

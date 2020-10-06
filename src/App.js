@@ -4,6 +4,7 @@ import LadaLoadingQueueTable from "./components/loading-queue-table";
 import LadaFreeGateTable from "./components/free-gate-table";
 import NineOrFractionsTable from "./components/nine-or-fractions-table";
 import Remove from "./components/remove";
+import Sixteen from "./components/sixteen";
 
 export default class App extends Component {
   constructor(props) {
@@ -67,10 +68,10 @@ export default class App extends Component {
   }
 
   render() {
-    if (this.state.data !== null && this.state.free_gate !== null) {
+    if (this.state.data !== null) {
       return (
         <div className="container-fluid full-page-height m-0" id="container">
-          {this.getURLVar("warehouse") === "lada" ?
+          {this.getURLVar("warehouse") === "Lada" ?
             <div className="row justify-content-between">
               <div className="col-10 p-0 pr-2">
                 <LadaLoadingQueueTable
@@ -98,6 +99,15 @@ export default class App extends Component {
            <div className="row">
             <div className="col-12 p-2">
               <Remove 
+                data={this.state.data}
+                scroll={this.state.scroll_frequency} 
+              />
+            </div>
+          </div>
+           : this.getURLVar("warehouse") === "sixteen" ? 
+           <div className="row">
+            <div className="col-12 pl-1 pr-1 pt-1 pb-0">
+              <Sixteen 
                 data={this.state.data}
                 scroll={this.state.scroll_frequency} 
               />

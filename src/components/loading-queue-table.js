@@ -47,18 +47,25 @@ export default class LoadingQueueTable extends Component {
   };
 
   componentDidMount() {
-    this.heightPage = document.getElementById("container").clientHeight;
-    this.heightLine = document.getElementById("field-height-loading-queue").clientHeight;
-    this.heightHeaderLine = document.getElementById("header-field-height-loading-queue").clientHeight;
-    this.perPage = Math.floor(this.heightPage / this.heightLine) - 1;
-    if (this.heightHeaderLine + (this.heightLine)*this.perPage > this.heightPage){
-      this.perPage--;
+    try {
+      this.heightPage = document.getElementById("container").clientHeight;
+      this.heightLine = document.getElementById("field-height-remove-table").clientHeight;
+    }catch(e){
+      this.heightPage = null;
+      this.heightLine = null;
     }
-    this.expectNewToAndFrom();
-    this.timer = setInterval(
-      () => this.getTheNumberOfPages(),
-      this.props.scroll * 1000
-    );
+    if (this.heightPage !== null && this.heightLine !== null){
+      this.heightHeaderLine = document.getElementById("header-field-height-loading-queue").clientHeight;
+      this.perPage = Math.floor(this.heightPage / this.heightLine) - 1;
+      if (this.heightHeaderLine + (this.heightLine)*this.perPage > this.heightPage){
+        this.perPage--;
+      }
+      this.expectNewToAndFrom();
+      this.timer = setInterval(
+        () => this.getTheNumberOfPages(),
+        this.props.scroll * 1000
+      );
+    }
   }
 
   componentWillUnmount() {

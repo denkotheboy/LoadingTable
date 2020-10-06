@@ -6,6 +6,7 @@
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {
+    "antd": "^4.6.6",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-scripts": "3.4.3",

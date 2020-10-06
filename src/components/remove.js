@@ -47,17 +47,24 @@ export default class Remove extends Component {
   };
 
   componentDidMount() {
-    this.heightPage = document.getElementById("container").clientHeight;
-    this.heightLine = document.getElementById("field-height-remove-table").clientHeight;
-    this.perPage = Math.floor(this.heightPage / this.heightLine);
-    if (this.heightLine * this.perPage + 16 > this.heightPage){
-      this.perPage--;
+    try {
+      this.heightPage = document.getElementById("container").clientHeight;
+      this.heightLine = document.getElementById("field-height-remove-table").clientHeight;
+    }catch(e){
+      this.heightPage = null;
+      this.heightLine = null;
     }
-    this.expectNewToAndFrom();
-    this.timer = setInterval(
-      () => this.getTheNumberOfPages(),
-      this.props.scroll * 1000
-    );
+    if (this.heightPage !== null && this.heightLine !== null){
+      this.perPage = Math.floor(this.heightPage / this.heightLine);
+      if (this.heightLine * this.perPage + 16 > this.heightPage){
+        this.perPage--;
+      }
+      this.expectNewToAndFrom();
+      this.timer = setInterval(
+        () => this.getTheNumberOfPages(),
+        this.props.scroll * 1000
+      );
+    }
   }
 
   whatIsTheLineColor = (count_collect, count_pack, count_pack_theme, id) => {
