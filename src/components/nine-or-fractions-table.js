@@ -99,26 +99,30 @@ export default class NineOrFractionsTable extends Component {
   }
 
   render() {
-    this.sortByIncreasing();
-    return (
-      <>
-        <table className="table table-bordered table-striped table-success">
-          <tbody>
-            {Object.keys(this.props.data).map((line, id) =>
-              id < this.state.to && id >= this.state.from ? (
-                <tr key={id} id="field-height-nine-or-fractions-table">
-                  <td className={"text-size-vw w-75 align-middle "+this.whatIsTheLineColor(Object.values(this.props.data[line].ready), id)}>
-                    <strong>{Object.values(this.props.data[line].document)}</strong>
-                  </td>
-                  <td className={"text-size-vw w-25 align-middle "+this.whatIsTheLineColor(Object.values(this.props.data[line].ready), id)}>
-                    <strong>{Object.values(this.props.data[line].gate)}</strong>
-                  </td>
-                </tr>
-              ) : null
-            )}
-          </tbody>
-        </table>
-      </>
-    );
+    if (this.props.data.length > 0){
+      this.sortByIncreasing();
+      return (
+        <>
+          <table className="table table-bordered table-striped table-success">
+            <tbody>
+              {Object.keys(this.props.data).map((line, id) =>
+                id < this.state.to && id >= this.state.from ? (
+                  <tr key={id} id="field-height-nine-or-fractions-table">
+                    <td className={"text-size-vw w-75 align-middle "+this.whatIsTheLineColor(Object.values(this.props.data[line].ready), id)}>
+                      <strong>{Object.values(this.props.data[line].document)}</strong>
+                    </td>
+                    <td className={"text-size-vw w-25 align-middle "+this.whatIsTheLineColor(Object.values(this.props.data[line].ready), id)}>
+                      <strong>{Object.values(this.props.data[line].gate)}</strong>
+                    </td>
+                  </tr>
+                ) : null
+              )}
+            </tbody>
+          </table>
+        </>
+      );
+    }else {
+      return null;
+    }
   }
 }
