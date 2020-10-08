@@ -49,7 +49,7 @@ export default class NineOrFractionsTable extends Component {
   componentDidMount() {
     try {
       this.heightPage = document.getElementById("container").clientHeight;
-      this.heightLine = document.getElementById("field-height-remove-table").clientHeight;
+      this.heightLine = document.getElementById("field-height-nine-or-fractions-table").clientHeight;
     }catch(e){
       this.heightPage = null;
       this.heightLine = null;
@@ -89,7 +89,9 @@ export default class NineOrFractionsTable extends Component {
         <table className="table table-bordered table-striped table-success">
           <tbody>
             {Object.keys(this.props.data).map((line, id) =>
+              
               id < this.state.to && id >= this.state.from ? (
+                
                 <tr key={id} id="field-height-nine-or-fractions-table">
                   <td className={"text-size-vw w-75 align-middle "+this.whatIsTheLineColor(Object.values(this.props.data[line].ready), id)}>
                     <strong>{Object.values(this.props.data[line].document)}</strong>
