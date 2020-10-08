@@ -46,6 +46,20 @@ export default class NineOrFractionsTable extends Component {
     });
   };
 
+  
+  sortByIncreasing = () => {
+    let m;
+    Object.keys(this.props.data).forEach((line, id) => {
+      if (Number(line) + 1 < this.props.data.length && this.props.data.length > 1) {
+        if (this.props.data[line].document > this.props.data[Number(line) + 1].document){
+          m = this.props.data[Number(line) + 1];
+          this.props.data[Number(line) + 1] = this.props.data[line];
+          this.props.data[line] = m;
+        }
+      }
+    })
+  };
+
   componentDidMount() {
     try {
       this.heightPage = document.getElementById("container").clientHeight;
@@ -65,6 +79,7 @@ export default class NineOrFractionsTable extends Component {
         this.props.scroll * 1000
       );
     }
+    
   }
 
   whatIsTheLineColor = (ready, id) => {
@@ -84,14 +99,13 @@ export default class NineOrFractionsTable extends Component {
   }
 
   render() {
+    this.sortByIncreasing();
     return (
       <>
         <table className="table table-bordered table-striped table-success">
           <tbody>
             {Object.keys(this.props.data).map((line, id) =>
-              
               id < this.state.to && id >= this.state.from ? (
-                
                 <tr key={id} id="field-height-nine-or-fractions-table">
                   <td className={"text-size-vw w-75 align-middle "+this.whatIsTheLineColor(Object.values(this.props.data[line].ready), id)}>
                     <strong>{Object.values(this.props.data[line].document)}</strong>
