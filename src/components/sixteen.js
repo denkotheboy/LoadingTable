@@ -16,36 +16,6 @@ export default class Sixteen extends Component {
       numberOfPages: 1,
       page: 1
     };
-  }
-
-  getTheNumberOfPages = () => {
-    this.setState({
-      numberOfPages: Math.ceil(
-        Object.keys(this.props.data).length / this.perPage
-      )
-    });
-    this.nextPage();
-  };
-
-  nextPage = () => {
-    if (this.state.page < this.state.numberOfPages) {
-      this.setState({
-        page: this.state.page + 1
-      });
-    } else if (this.state.page === this.state.numberOfPages) {
-      this.setState({
-        page: 1
-      });
-    }
-    //console.log("Page: " + this.state.page);
-    this.expectNewToAndFrom();
-  };
-
-  expectNewToAndFrom = () => {
-    this.setState({
-      to: this.state.page * this.perPage,
-      from: this.state.page * this.perPage - this.perPage
-    });
   };
 
   componentDidMount() {
@@ -55,15 +25,7 @@ export default class Sixteen extends Component {
       this.heightPage = null;
     }
     if (this.heightPage !== null){
-      this.refRow.current.style.height = this.heightPage + "px";
-    }
-  }
-
-  whatIsTheLineColor = (count_collect, count_pack, count_pack_theme, id) => {
-    if (count_collect + count_pack + count_pack_theme === 0){
-      if (id % 2 === 0) return "bg-green"; else return "bg-green-2";
-    }else{
-      if (id % 2 === 0) return "bg-blue"; else return "bg-grey";
+      this.refRow.current.style.height = this.heightPage - 16 + "px";
     }
   };
 
@@ -366,5 +328,5 @@ export default class Sixteen extends Component {
         </div>
       </div>
     );
-  }
+  };
 }

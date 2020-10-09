@@ -1,10 +1,9 @@
 * {
-  /* cursor: none; */
+  cursor: none;
   font-style: normal; 
   font-weight: normal; 
 }
 .App {
-  /* font-family: sans-serif; */
   text-align: center;
 }
 
@@ -18,8 +17,6 @@
 }
 
 td.text-center, th.text-center {
-  /* font-size: 2.8vh; */
-  /* font-size: 2vmin; */
   font-size: 1.6vw;
 }
 

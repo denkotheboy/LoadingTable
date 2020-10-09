@@ -6,7 +6,6 @@ export default class NineOrFractionsTable extends Component {
     this.heightPage = null;
     this.heightLine = null;
     this.perPage = null;
-    this.heightHeaderLine = null;
 
     this.state = {
       to: 1,
@@ -48,15 +47,17 @@ export default class NineOrFractionsTable extends Component {
 
   
   sortByIncreasing = () => {
-    let m;
-    Object.keys(this.props.data).forEach((line, id) => {
-      if (Number(line) + 1 < this.props.data.length && this.props.data.length > 1) {
-        if (this.props.data[line].document > this.props.data[Number(line) + 1].document){
-          m = this.props.data[Number(line) + 1];
-          this.props.data[Number(line) + 1] = this.props.data[line];
-          this.props.data[line] = m;
+    let m = null;
+    Object.keys(this.props.data).forEach(() => {
+      Object.keys(this.props.data).forEach((line, id) => {
+        if (Number(line) + 1 < this.props.data.length && this.props.data.length > 1) {
+          if (this.props.data[line].document > this.props.data[Number(line) + 1].document){
+            m = this.props.data[Number(line) + 1];
+            this.props.data[Number(line) + 1] = this.props.data[line];
+            this.props.data[line] = m;
+          }
         }
-      }
+      })
     })
   };
 
@@ -79,7 +80,6 @@ export default class NineOrFractionsTable extends Component {
         this.props.scroll * 1000
       );
     }
-    
   }
 
   whatIsTheLineColor = (ready, id) => {
