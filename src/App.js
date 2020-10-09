@@ -16,23 +16,27 @@ export default class App extends Component {
       data: null,
       free_gate: null,
       scroll_frequency: 5,
-      update_frequency: 10
+      update_frequency: 10,
     };
   }
 
   getURLVar = (key) => {
-    var vars = window.location.search.substr(1).split('&').reduce(function(res, a) {
-      var t = a.split('=');
-      res[decodeURIComponent(t[0])] = t.length === 1 ? null : decodeURIComponent(t[1]);
-      return res;
-    }, {});
-    return vars[key] ? vars[key] : ''; 
-  }
+    var vars = window.location.search
+      .substr(1)
+      .split("&")
+      .reduce(function (res, a) {
+        var t = a.split("=");
+        res[decodeURIComponent(t[0])] =
+          t.length === 1 ? null : decodeURIComponent(t[1]);
+        return res;
+      }, {});
+    return vars[key] ? vars[key] : "";
+  };
 
   updateTheData = () => {
     if (!this.state.isLoaded) {
       //fetch("./data?warehouse=Lada")
-      fetch("./?warehouse="+this.getURLVar("warehouse"))
+      fetch("./?warehouse=" + this.getURLVar("warehouse"))
         .then((res) => res.json())
         .then(
           (result) => {
@@ -40,14 +44,20 @@ export default class App extends Component {
               isLoaded: true,
               data: result.data,
               free_gate: result.free_gate,
-              scroll_frequency: result.scroll_frequency !== undefined ? result.scroll_frequency : 5,
-              update_frequency: result.update_frequency !== undefined ? result.update_frequency : 15,
+              scroll_frequency:
+                result.scroll_frequency !== undefined
+                  ? result.scroll_frequency
+                  : 5,
+              update_frequency:
+                result.update_frequency !== undefined
+                  ? result.update_frequency
+                  : 15,
             });
           },
           (error) => {
             this.setState({
               isLoaded: true,
-              error: error
+              error: error,
             });
             console.log(error);
           }
@@ -58,7 +68,7 @@ export default class App extends Component {
   componentDidMount() {
     this.updateTheData();
     this.timer = setInterval(() => {
-      this.setState({isLoaded: false});
+      this.setState({ isLoaded: false });
       this.updateTheData();
     }, this.state.update_frequency * 1000);
   }
@@ -71,7 +81,7 @@ export default class App extends Component {
     if (this.state.data !== null) {
       return (
         <div className="container-fluid full-page-height m-0" id="container">
-          {this.getURLVar("warehouse") === "Lada" ?
+          {this.getURLVar("warehouse") === "Lada" ? (
             <div className="row justify-content-between">
               <div className="col-10 p-0 pr-2">
                 <LadaLoadingQueueTable
@@ -86,33 +96,32 @@ export default class App extends Component {
                 />
               </div>
             </div>
-          : this.getURLVar("warehouse") === "nine" || this.getURLVar("warehouse") === "fractions" ? 
-          <div className="row p-0">
-            <div className="col-12 pt-2 pr-2 pl-2">
-              <NineOrFractionsTable 
-                data={this.state.data}
-                scroll={this.state.scroll_frequency} 
-              />
+          ) : this.getURLVar("warehouse") === "nine" ||
+            this.getURLVar("warehouse") === "fractions" ? (
+            <div className="row p-0">
+              <div className="col-12 pt-2 pr-2 pl-2">
+                <NineOrFractionsTable
+                  data={this.state.data}
+                  scroll={this.state.scroll_frequency}
+                />
+              </div>
             </div>
-          </div>:
-           this.getURLVar("warehouse") === "remove" ? 
-           <div className="row">
-            <div className="col-12 p-2">
-              <Remove 
-                data={this.state.data}
-                scroll={this.state.scroll_frequency} 
-              />
+          ) : this.getURLVar("warehouse") === "remove" ? (
+            <div className="row">
+              <div className="col-12 p-2">
+                <Remove
+                  data={this.state.data}
+                  scroll={this.state.scroll_frequency}
+                />
+              </div>
             </div>
-          </div>
-           : this.getURLVar("warehouse") === "sixteen" ? 
-           <div className="row">
-            <div className="col-12 pl-1 pr-1 pt-1 pb-0">
-              <Sixteen 
-                data={this.state.data}
-              />
+          ) : this.getURLVar("warehouse") === "sixteen" ? (
+            <div className="row">
+              <div className="col-12 pl-1 pr-1 pt-1 pb-0">
+                <Sixteen data={this.state.data} />
+              </div>
             </div>
-          </div>
-           : null}
+          ) : null}
         </div>
       );
     } else {

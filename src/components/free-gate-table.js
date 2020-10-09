@@ -12,7 +12,7 @@ export default class FreeGateTable extends Component {
       to: 1,
       from: 0,
       numberOfPages: 1,
-      page: 1
+      page: 1,
     };
   }
 
@@ -20,7 +20,7 @@ export default class FreeGateTable extends Component {
     this.setState({
       numberOfPages: Math.ceil(
         Object.keys(this.props.data).length / this.perPage
-      )
+      ),
     });
     this.nextPage();
   };
@@ -28,11 +28,11 @@ export default class FreeGateTable extends Component {
   nextPage = () => {
     if (this.state.page < this.state.numberOfPages) {
       this.setState({
-        page: this.state.page + 1
+        page: this.state.page + 1,
       });
     } else if (this.state.page === this.state.numberOfPages) {
       this.setState({
-        page: 1
+        page: 1,
       });
     }
     //console.log("Page gate: " + this.state.page);
@@ -42,16 +42,23 @@ export default class FreeGateTable extends Component {
   expectNewToAndFrom = () => {
     this.setState({
       to: this.state.page * this.perPage,
-      from: this.state.page * this.perPage - this.perPage
+      from: this.state.page * this.perPage - this.perPage,
     });
   };
 
   componentDidMount() {
     this.heightPage = document.getElementById("container").clientHeight;
-    this.heightLine = document.getElementById("field-height-free-gate").clientHeight;
-    this.heightHeaderLine = document.getElementById("header-field-height-free-gate").clientHeight;
+    this.heightLine = document.getElementById(
+      "field-height-free-gate"
+    ).clientHeight;
+    this.heightHeaderLine = document.getElementById(
+      "header-field-height-free-gate"
+    ).clientHeight;
     this.perPage = Math.floor(this.heightPage / this.heightLine) - 1;
-    if (this.heightHeaderLine + (this.heightLine)*this.perPage > this.heightPage){
+    if (
+      this.heightHeaderLine + this.heightLine * this.perPage >
+      this.heightPage
+    ) {
       this.perPage--;
     }
     this.expectNewToAndFrom();

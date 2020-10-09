@@ -12,7 +12,7 @@ export default class Remove extends Component {
       to: 1,
       from: 0,
       numberOfPages: 1,
-      page: 1
+      page: 1,
     };
   }
 
@@ -20,7 +20,7 @@ export default class Remove extends Component {
     this.setState({
       numberOfPages: Math.ceil(
         Object.keys(this.props.data).length / this.perPage
-      )
+      ),
     });
     this.nextPage();
   };
@@ -28,11 +28,11 @@ export default class Remove extends Component {
   nextPage = () => {
     if (this.state.page < this.state.numberOfPages) {
       this.setState({
-        page: this.state.page + 1
+        page: this.state.page + 1,
       });
     } else if (this.state.page === this.state.numberOfPages) {
       this.setState({
-        page: 1
+        page: 1,
       });
     }
     //console.log("Page: " + this.state.page);
@@ -42,21 +42,23 @@ export default class Remove extends Component {
   expectNewToAndFrom = () => {
     this.setState({
       to: this.state.page * this.perPage,
-      from: this.state.page * this.perPage - this.perPage
+      from: this.state.page * this.perPage - this.perPage,
     });
   };
 
   componentDidMount() {
     try {
       this.heightPage = document.getElementById("container").clientHeight;
-      this.heightLine = document.getElementById("field-height-remove-table").clientHeight;
-    }catch(e){
+      this.heightLine = document.getElementById(
+        "field-height-remove-table"
+      ).clientHeight;
+    } catch (e) {
       this.heightPage = null;
       this.heightLine = null;
     }
-    if (this.heightPage !== null && this.heightLine !== null){
+    if (this.heightPage !== null && this.heightLine !== null) {
       this.perPage = Math.floor(this.heightPage / this.heightLine);
-      if (this.heightLine * this.perPage + 16 > this.heightPage){
+      if (this.heightLine * this.perPage + 16 > this.heightPage) {
         this.perPage--;
       }
       this.expectNewToAndFrom();
@@ -68,10 +70,12 @@ export default class Remove extends Component {
   }
 
   whatIsTheLineColor = (count_collect, count_pack, count_pack_theme, id) => {
-    if (count_collect + count_pack + count_pack_theme === 0){
-      if (id % 2 === 0) return "bg-green"; else return "bg-green-2";
-    }else{
-      if (id % 2 === 0) return "bg-blue"; else return "bg-grey";
+    if (count_collect + count_pack + count_pack_theme === 0) {
+      if (id % 2 === 0) return "bg-green";
+      else return "bg-green-2";
+    } else {
+      if (id % 2 === 0) return "bg-blue";
+      else return "bg-grey";
     }
   };
 
@@ -80,7 +84,7 @@ export default class Remove extends Component {
   }
 
   render() {
-    if (this.props.data.length > 0){
+    if (this.props.data.length > 0) {
       return (
         <>
           <table className="table table-bordered table-striped table-success m-0 p-0">
@@ -88,22 +92,94 @@ export default class Remove extends Component {
               {Object.keys(this.props.data).map((line, id) =>
                 id < this.state.to && id >= this.state.from ? (
                   <tr key={id} id="field-height-remove-table">
-                    <td width="15%" className={"remove-text-size-vw align-middle "+this.whatIsTheLineColor(this.props.data[line].count_collect, this.props.data[line].count_pack, this.props.data[line].count_pack_theme, id)}>
-                      <strong>{Object.values(this.props.data[line].number)}</strong>
+                    <td
+                      width="15%"
+                      className={
+                        "remove-text-size-vw align-middle " +
+                        this.whatIsTheLineColor(
+                          this.props.data[line].count_collect,
+                          this.props.data[line].count_pack,
+                          this.props.data[line].count_pack_theme,
+                          id
+                        )
+                      }
+                    >
+                      <strong>
+                        {Object.values(this.props.data[line].number)}
+                      </strong>
                     </td>
-                    <td width="15%" className={"remove-text-size-vw align-middle "+this.whatIsTheLineColor(this.props.data[line].count_collect, this.props.data[line].count_pack, this.props.data[line].count_pack_theme, id)}>
-                      <strong>{Object.values(this.props.data[line].date)}</strong>
+                    <td
+                      width="15%"
+                      className={
+                        "remove-text-size-vw align-middle " +
+                        this.whatIsTheLineColor(
+                          this.props.data[line].count_collect,
+                          this.props.data[line].count_pack,
+                          this.props.data[line].count_pack_theme,
+                          id
+                        )
+                      }
+                    >
+                      <strong>
+                        {Object.values(this.props.data[line].date)}
+                      </strong>
                     </td>
-                    <td width="40%" className={"remove-text-size-vw align-middle "+this.whatIsTheLineColor(this.props.data[line].count_collect, this.props.data[line].count_pack, this.props.data[line].count_pack_theme, id)}>
-                      <strong>{Object.values(this.props.data[line].route)}</strong>
+                    <td
+                      width="40%"
+                      className={
+                        "remove-text-size-vw align-middle " +
+                        this.whatIsTheLineColor(
+                          this.props.data[line].count_collect,
+                          this.props.data[line].count_pack,
+                          this.props.data[line].count_pack_theme,
+                          id
+                        )
+                      }
+                    >
+                      <strong>
+                        {Object.values(this.props.data[line].route)}
+                      </strong>
                     </td>
-                    <td width="10%" className={"remove-text-size-vw align-middle "+this.whatIsTheLineColor(this.props.data[line].count_collect, this.props.data[line].count_pack, this.props.data[line].count_pack_theme, id)}>
+                    <td
+                      width="10%"
+                      className={
+                        "remove-text-size-vw align-middle " +
+                        this.whatIsTheLineColor(
+                          this.props.data[line].count_collect,
+                          this.props.data[line].count_pack,
+                          this.props.data[line].count_pack_theme,
+                          id
+                        )
+                      }
+                    >
                       <strong>{this.props.data[line].count_collect}</strong>
                     </td>
-                    <td width="10%" className={"remove-text-size-vw w-auto align-middle "+this.whatIsTheLineColor(this.props.data[line].count_collect, this.props.data[line].count_pack, this.props.data[line].count_pack_theme, id)}>
+                    <td
+                      width="10%"
+                      className={
+                        "remove-text-size-vw w-auto align-middle " +
+                        this.whatIsTheLineColor(
+                          this.props.data[line].count_collect,
+                          this.props.data[line].count_pack,
+                          this.props.data[line].count_pack_theme,
+                          id
+                        )
+                      }
+                    >
                       <strong>{this.props.data[line].count_pack}</strong>
                     </td>
-                    <td width="10%" className={"remove-text-size-vw w-auto align-middle "+this.whatIsTheLineColor(this.props.data[line].count_collect, this.props.data[line].count_pack, this.props.data[line].count_pack_theme, id)}>
+                    <td
+                      width="10%"
+                      className={
+                        "remove-text-size-vw w-auto align-middle " +
+                        this.whatIsTheLineColor(
+                          this.props.data[line].count_collect,
+                          this.props.data[line].count_pack,
+                          this.props.data[line].count_pack_theme,
+                          id
+                        )
+                      }
+                    >
                       <strong>{this.props.data[line].count_pack_theme}</strong>
                     </td>
                   </tr>
@@ -113,7 +189,7 @@ export default class Remove extends Component {
           </table>
         </>
       );
-    }else {
+    } else {
       return null;
     }
   }
