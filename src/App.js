@@ -36,7 +36,7 @@ export default class App extends Component {
   updateTheData = () => {
     if (!this.state.isLoaded) {
       //fetch("./data?warehouse=Lada")
-      fetch("./?warehouse=" + this.getURLVar("warehouse"))
+      fetch("./data?warehouse=" + this.getURLVar("warehouse"))
         .then((res) => res.json())
         .then(
           (result) => {
