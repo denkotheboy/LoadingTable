@@ -1,8 +1,12 @@
 * {
-  cursor: none;
   font-style: normal; 
   font-weight: normal; 
 }
+
+.cursor {
+  cursor: none;
+}
+
 .App {
   text-align: center;
 }

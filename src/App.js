@@ -35,8 +35,8 @@ export default class App extends Component {
 
   updateTheData = () => {
     if (!this.state.isLoaded) {
-      //fetch("./data?warehouse=Lada")
-      fetch("./data?warehouse=" + this.getURLVar("warehouse"))
+      fetch("https://wh-service.sima-land.ru/pyextradition/api/v1/data?warehouse=" + this.getURLVar("warehouse"))
+      //fetch("./data?warehouse=" + this.getURLVar("warehouse"))
         .then((res) => res.json())
         .then(
           (result) => {
@@ -80,7 +80,7 @@ export default class App extends Component {
   render() {
     if (this.state.data !== null) {
       return (
-        <div className="container-fluid full-page-height m-0" id="container">
+        <div className={this.getURLVar("warehouse") === "remove" ? "container-fluid full-page-height m-0" : "container-fluid full-page-height m-0 cursor"} id="container">
           {this.getURLVar("warehouse") === "Lada" ? (
             <div className="row justify-content-between">
               <div className="col-10 p-0 pr-2">

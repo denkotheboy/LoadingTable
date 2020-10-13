@@ -18,7 +18,7 @@ export default class Sixteen extends Component {
     };
   }
 
-  componentDidMount() {
+  resize = () => {
     try {
       this.heightPage = document.getElementById("container").clientHeight;
     } catch (e) {
@@ -27,6 +27,13 @@ export default class Sixteen extends Component {
     if (this.heightPage !== null) {
       this.refRow.current.style.height = this.heightPage - 16 + "px";
     }
+  };
+
+  componentDidMount() {
+    this.resize();
+    window.addEventListener(`resize`, event => {
+      this.resize();
+    }, false);
   }
 
   getColor = (order_done, left, top, right, bottom) => {

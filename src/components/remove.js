@@ -46,7 +46,7 @@ export default class Remove extends Component {
     });
   };
 
-  componentDidMount() {
+  resize = () => {
     try {
       this.heightPage = document.getElementById("container").clientHeight;
       this.heightLine = document.getElementById(
@@ -62,11 +62,19 @@ export default class Remove extends Component {
         this.perPage--;
       }
       this.expectNewToAndFrom();
+      clearInterval(this.timer);
       this.timer = setInterval(
         () => this.getTheNumberOfPages(),
         this.props.scroll * 1000
       );
     }
+  };
+
+  componentDidMount() {
+    this.resize();
+    window.addEventListener(`resize`, event => {
+      this.resize();
+    }, false);
   }
 
   whatIsTheLineColor = (count_collect, count_pack, count_pack_theme, id) => {
