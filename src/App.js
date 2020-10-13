@@ -35,8 +35,8 @@ export default class App extends Component {
 
   updateTheData = () => {
     if (!this.state.isLoaded) {
-      fetch("https://wh-service.sima-land.ru/pyextradition/api/v1/data?warehouse=" + this.getURLVar("warehouse"))
-      //fetch("./data?warehouse=" + this.getURLVar("warehouse"))
+      //fetch("https://wh-service.sima-land.ru/pyextradition/api/v1/data?warehouse=" + this.getURLVar("warehouse"))
+      fetch("./data?warehouse=" + this.getURLVar("warehouse"))
         .then((res) => res.json())
         .then(
           (result) => {
