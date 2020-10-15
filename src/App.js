@@ -35,8 +35,8 @@ export default class App extends Component {
 
   updateTheData = () => {
     if (!this.state.isLoaded) {
-      //fetch("https://wh-service.sima-land.ru/pyextradition/api/v1/data?warehouse=" + this.getURLVar("warehouse"))
-      fetch("./data?warehouse=" + this.getURLVar("warehouse"))
+      fetch("https://wh-service.sima-land.ru/pyextradition/api/v1/data?warehouse=" + this.getURLVar("warehouse"))
+      //fetch("./data?warehouse=" + this.getURLVar("warehouse"))
         .then((res) => res.json())
         .then(
           (result) => {
@@ -44,14 +44,8 @@ export default class App extends Component {
               isLoaded: true,
               data: result.data,
               free_gate: result.free_gate,
-              scroll_frequency:
-                result.scroll_frequency !== undefined
-                  ? result.scroll_frequency
-                  : 5,
-              update_frequency:
-                result.update_frequency !== undefined
-                  ? result.update_frequency
-                  : 15,
+              scroll_frequency: result.scroll_frequency !== undefined ? result.scroll_frequency : 5,
+              update_frequency: result.update_frequency !== undefined ? result.update_frequency : 15,
             });
           },
           (error) => {
@@ -67,10 +61,10 @@ export default class App extends Component {
 
   componentDidMount() {
     this.updateTheData();
-    this.timer = setInterval(() => {
-      this.setState({ isLoaded: false });
-      this.updateTheData();
-    }, this.state.update_frequency * 1000);
+    // this.timer = setInterval(() => {
+    //   this.setState({ isLoaded: false });
+    //   this.updateTheData();
+    // }, this.state.update_frequency * 1000);
   }
 
   componentWillUnmount() {
@@ -78,7 +72,7 @@ export default class App extends Component {
   }
 
   render() {
-    if (this.state.data !== null) {
+    if (this.state.data !== null && this.getURLVar("warehouse")) {
       return (
         <div className={this.getURLVar("warehouse") === "remove" ? "container-fluid full-page-height m-0" : "container-fluid full-page-height m-0 cursor"} id="container">
           {this.getURLVar("warehouse") === "Lada" ? (
@@ -117,7 +111,7 @@ export default class App extends Component {
             </div>
           ) : this.getURLVar("warehouse") === "sixteen" ? (
             <div className="row">
-              <div className="col-12 pl-1 pr-1 pt-1 pb-0">
+              <div className="col-12 pl-1 pr-1 pt-1 pb-0 ">
                 <Sixteen data={this.state.data} />
               </div>
             </div>
