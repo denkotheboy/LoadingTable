@@ -61,10 +61,10 @@ export default class App extends Component {
 
   componentDidMount() {
     this.updateTheData();
-    // this.timer = setInterval(() => {
-    //   this.setState({ isLoaded: false });
-    //   this.updateTheData();
-    // }, this.state.update_frequency * 1000);
+    this.timer = setInterval(() => {
+      this.setState({ isLoaded: false });
+      this.updateTheData();
+    }, this.state.update_frequency * 1000);
   }
 
   componentWillUnmount() {

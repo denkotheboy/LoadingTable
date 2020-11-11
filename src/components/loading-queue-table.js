@@ -50,23 +50,24 @@ export default class LoadingQueueTable extends Component {
     try {
       this.heightPage = document.getElementById("container").clientHeight;
       this.heightLine = document.getElementById(
-        "field-height-remove-table"
+        "field-height-loading-queue"
       ).clientHeight;
     } catch (e) {
       this.heightPage = null;
       this.heightLine = null;
     }
     if (this.heightPage !== null && this.heightLine !== null) {
+      console.log(1);
       this.heightHeaderLine = document.getElementById(
         "header-field-height-loading-queue"
       ).clientHeight;
       this.perPage = Math.floor(this.heightPage / this.heightLine) - 1;
       if (
-        this.heightHeaderLine + this.heightLine * this.perPage >
-        this.heightPage
+        this.heightHeaderLine + this.heightLine * this.perPage > this.heightPage
       ) {
         this.perPage--;
       }
+      console.log(this.perPage);
       this.expectNewToAndFrom();
       clearInterval(this.timer);
       this.timer = setInterval(

@@ -93,6 +93,7 @@ export default class Remove extends Component {
   };
 
   timerScroll = () => {
+    clearInterval(this.timer);
     this.timer = setInterval(
       () => this.nextPage(),
       this.props.scroll * 1000
