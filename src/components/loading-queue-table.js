@@ -57,7 +57,7 @@ export default class LoadingQueueTable extends Component {
       this.heightLine = null;
     }
     if (this.heightPage !== null && this.heightLine !== null) {
-      console.log(1);
+
       this.heightHeaderLine = document.getElementById(
         "header-field-height-loading-queue"
       ).clientHeight;
@@ -67,7 +67,6 @@ export default class LoadingQueueTable extends Component {
       ) {
         this.perPage--;
       }
-      console.log(this.perPage);
       this.expectNewToAndFrom();
       clearInterval(this.timer);
       this.timer = setInterval(
